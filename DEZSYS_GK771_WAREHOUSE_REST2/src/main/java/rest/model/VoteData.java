@@ -12,12 +12,14 @@ public class VoteData {
     private String federalState;
     private String timestamp;
     private List<PartyData> countingData;
+    private List<PreferentialVote> preferentialVotes; // Vorzugsstimmen
 
     /**
      * Constructor
      */
     public VoteData() {
         this.countingData = new ArrayList<>();
+        this.preferentialVotes = new ArrayList<>();
     }
 
     /**
@@ -79,6 +81,14 @@ public class VoteData {
         this.countingData = countingData;
     }
 
+    public List<PreferentialVote> getPreferentialVotes() {
+        return preferentialVotes;
+    }
+
+    public void setPreferentialVotes(List<PreferentialVote> preferentialVotes) {
+        this.preferentialVotes = preferentialVotes;
+    }
+
     /**
      * Converts the object to XML format
      */
@@ -91,11 +101,21 @@ public class VoteData {
         xml.append(String.format("  <regionPostalCode>%s</regionPostalCode>\n", regionPostalCode));
         xml.append(String.format("  <federalState>%s</federalState>\n", federalState));
         xml.append(String.format("  <timestamp>%s</timestamp>\n", timestamp));
+
+        // Counting data (Parteiergebnisse)
         xml.append("  <countingData>\n");
         for (PartyData party : countingData) {
             xml.append(party.toXML());
         }
         xml.append("  </countingData>\n");
+
+        // Vorzugsstimmen (Preferential Votes)
+        xml.append("  <preferentialVotes>\n");
+        for (PreferentialVote vote : preferentialVotes) {
+            xml.append(vote.toXML());
+        }
+        xml.append("  </preferentialVotes>\n");
+
         xml.append("</electionData>");
         return xml.toString();
     }
@@ -112,10 +132,23 @@ public class VoteData {
         json.append(String.format("  \"regionPostalCode\": \"%s\",\n", regionPostalCode));
         json.append(String.format("  \"federalState\": \"%s\",\n", federalState));
         json.append(String.format("  \"timestamp\": \"%s\",\n", timestamp));
+
+        // Counting data (Parteiergebnisse)
         json.append("  \"countingData\": [\n");
         for (int i = 0; i < countingData.size(); i++) {
             json.append(countingData.get(i).toJSON());
             if (i < countingData.size() - 1) {
+                json.append(",");
+            }
+            json.append("\n");
+        }
+        json.append("  ],\n");
+
+        // Preferential Votes
+        json.append("  \"preferentialVotes\": [\n");
+        for (int i = 0; i < preferentialVotes.size(); i++) {
+            json.append(preferentialVotes.get(i).toJSON());
+            if (i < preferentialVotes.size() - 1) {
                 json.append(",");
             }
             json.append("\n");
@@ -157,4 +190,44 @@ public class VoteData {
         }
     }
 
+    /**
+     * Inner Class for Preferential Votes
+     */
+    public static class PreferentialVote {
+        private int listNumber;
+        private String personName;
+        private int votes;
+
+        public int getListNumber() {
+            return listNumber;
+        }
+
+        public void setListNumber(int listNumber) {
+            this.listNumber = listNumber;
+        }
+
+        public String getPersonName() {
+            return personName;
+        }
+
+        public void setPersonName(String personName) {
+            this.personName = personName;
+        }
+
+        public int getVotes() {
+            return votes;
+        }
+
+        public void setVotes(int votes) {
+            this.votes = votes;
+        }
+
+        public String toXML() {
+            return String.format("    <preferentialVote>\n      <listNumber>%d</listNumber>\n      <personName>%s</personName>\n      <votes>%d</votes>\n    </preferentialVote>\n", listNumber, personName, votes);
+        }
+
+        public String toJSON() {
+            return String.format("    {\n      \"listNumber\": %d,\n      \"personName\": \"%s\",\n      \"votes\": %d\n    }", listNumber, personName, votes);
+        }
+    }
 }
