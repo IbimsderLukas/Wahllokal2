@@ -9,13 +9,13 @@ Es werden mit Rest Schnittstellen erschaffen die bei einem Aufruf eines bestimmt
 
 ## Was war neu?
 HTML in Java:
-'@RequestMapping("/vote")    
+`@RequestMapping("/vote")    
     public String voteMain() {
         String mainPage = "Welcome to the Voting Application! <br/><br/>" +
                 "<a href='http://localhost:8080/vote/33123/json'>Link to vote/33123/json</a><br/>" +
                 "<a href='http://localhost:8080/vote/33123/xml'>Link to vote/33123/xml</a>";
         return mainPage;
-    }'
+    }`
 
   Hier wird beim Aufruf der URL localhost:8080 (Springboot adresse) /vote, die Methode voteMain()
  aufgerufen und ausgeführt die einen Strin mit HTML code zurückgibt der dann auf der Website als html code angeführt wird
@@ -23,11 +23,11 @@ HTML in Java:
 
 
 Path Variablen und ID´s;
-'@RequestMapping(value = "/vote/{regionID}/json", produces = MediaType.APPLICATION_JSON_VALUE)
+`@RequestMapping(value = "/vote/{regionID}/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getVoteDataAsJSON(@PathVariable String regionID) {
         VoteData data = service.getVoteData(regionID);
         return data.toJSON();
-    }'
+    }`
 
   Hier wird wie oben beim aufruf der /vote/.../json beim Aufruf dieser URL die angegebene Methode aufgerufen, mit einem unterschied:
     Die region ID ist kein fixer Wert und wird als parameter in einem String gespeichert mit der hilfe von @PathVariable. Mit der Hilfe der region ID kann dann die passende JSON oder XML seite aufgerufen werden.
