@@ -20,7 +20,7 @@ HTML in Java:
 	    }`
 
   Hier wird beim Aufruf der URL localhost:8080 (Springboot adresse) /vote, die Methode voteMain()
- aufgerufen und ausgeführt die einen Strin mit HTML code zurückgibt der dann auf der Website als html code angeführt wird
+ aufgerufen und ausgeführt die einen String mit HTML code zurückgibt der dann auf der Website als html code angeführt wird
 
 
 
