@@ -9,6 +9,8 @@ Es werden mit Rest Schnittstellen erschaffen die bei einem Aufruf eines bestimmt
 
 ## Was war neu?
 HTML in Java:
+
+
 `@RequestMapping("/vote")    
     public String voteMain() {
         String mainPage = "Welcome to the Voting Application! <br/><br/>" +
@@ -23,6 +25,8 @@ HTML in Java:
 
 
 Path Variablen und ID´s;
+
+
 `@RequestMapping(value = "/vote/{regionID}/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getVoteDataAsJSON(@PathVariable String regionID) {
         VoteData data = service.getVoteData(regionID);
