@@ -36,6 +36,15 @@ Path Variablen und ID´s;
   Hier wird wie oben beim aufruf der /vote/.../json beim Aufruf dieser URL die angegebene Methode aufgerufen, mit einem unterschied:
     Die region ID ist kein fixer Wert und wird als parameter in einem String gespeichert mit der hilfe von @PathVariable. Mit der Hilfe der region ID kann dann die passende JSON oder XML seite aufgerufen werden.
     MediaType.APPLICATION_JSON_VALUE bewirkt das die Seite als JSON angibt.
+
+
+
+    `public static void main(String[] args) {
+		SpringApplication.run(WarehouseApplication.class, args);
+	}`
+
+
+ Hier ist die Application die als Main interagiert oder anders gesagt die springboot statet.
  
 ## Quellen
 https://spring.io/projects/spring-boot
